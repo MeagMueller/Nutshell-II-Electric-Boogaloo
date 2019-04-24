@@ -19,7 +19,7 @@ import articleEventHandlers from "../articles/articleEventHandlers"
 const articlesContainer = document.querySelector("#articles-section")
 
 const articlesForms = {
-    newArticle: (eachArticle) => {
+    newArticle(eachArticle) {
         let newArticleFragment = document.createDocumentFragment()
         
         titleLabel = functions.createEachElement("label", "Title: ", "titleLabel")
@@ -43,7 +43,7 @@ const articlesForms = {
 
     },
 
-    buildNewArticle: (eachNewArticle) => {
+    buildNewArticle(eachNewArticle) {
         let buildFragment = document.createDocumentFragment()
         
         eachNewArticle.forEach(article => {
@@ -60,15 +60,15 @@ const articlesForms = {
         })
     },
 
-    articlesList: () => {
+    articlesList() {
         if (articlesContainer.firstChild) {
             articlesContainer.appendChild(articlesForms.newArticle())
         } else {
-            
+
         }
     },
 
-    editArticleForm = (eachArticle) => {
+    editArticleForm(eachArticle) {
         let editFragment = document.createDocumentFragment()
 
         editFragment.appendChild(functions.createEachElement("label", "Title: ", undefined))

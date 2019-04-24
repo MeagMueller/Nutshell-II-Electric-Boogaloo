@@ -1,11 +1,11 @@
 const url = "http://localhost:8088"
 
 export default fetchCalls = {
-    getAllArticles: () => {
+    getAllArticles() {
         return fetch(`${url}/articles`).then(response => response.json())
     }, 
 
-    postArticles: () => {
+    postArticles() {
         return fetch(`${url}/articles`, {
             method: "POST",
             headers: {

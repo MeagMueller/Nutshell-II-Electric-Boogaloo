@@ -4,7 +4,7 @@ import articlesForms from "../articles/articles"
 
 const articleEventHandlers = {
 
-    createArticle: () => {
+    createArticle() {
         const title = document.getElementById("titleInput").value
         const synopsis = document.getElementById("synopsisInput").value
         const url = document.getElementById("urlInput").value
@@ -21,7 +21,7 @@ const articleEventHandlers = {
         })
     },
 
-    editHandler: () => {
+    editHandler() {
         let articleToEditId = event.target.id
         const articleEditing = articleToEditId.split("--")[1]
 
@@ -34,7 +34,7 @@ const articleEventHandlers = {
 
     },
 
-    updateHandler: () => {
+    updateHandler() {
         let articleToUpdate = event.target.previousSibling.id
         const articleUpdating = articleToUpdate.split("--")[1]
 
