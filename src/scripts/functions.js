@@ -1,4 +1,4 @@
-const factoryFunctions = {
+const functions = {
     createEachElement(element, textInput, id) {
         const eachElement = document.createElement(element)
         if (textInput) {
@@ -21,4 +21,4 @@ const factoryFunctions = {
     
 }
 
-export default factoryFunctions
+export default functions
