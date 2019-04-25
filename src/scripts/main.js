@@ -1,5 +1,6 @@
 import callManager from "../scripts/callsManager"
 import buildHTML from "../scripts/articles/articles"
+import functions from "../scripts/functions"
 
 buildHTML.articleHeader()
 

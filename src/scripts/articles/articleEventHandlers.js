@@ -21,18 +21,18 @@ const articleEventHandlers = {
         })
     },
 
-    editHandler() {
-        let articleToEditId = event.target.id
-        const articleEditing = articleToEditId.split("--")[1]
+    // editHandler() {
+    //     let articleToEditId = event.target.id
+    //     const articleEditing = articleToEditId.split("--")[1]
 
-        const container = document.querySelector("#articles-section")
-        functions.clearContainer(container)
+    //     const container = document.querySelector("#articles-section")
+    //     functions.clearContainer(container)
 
-        fetchCalls.getAllArticles(articleEditing).then(editedInfo => {
-            // container.appendChild((thing that I am building on articles.js to create articles).editArticleForm(editedInfo))
-        })
+    //     fetchCalls.getAllArticles(articleEditing).then(editedInfo => {
+    //         // container.appendChild(().editArticleForm(editedInfo))
+    //     })
 
-    },
+    // },
 
     updateHandler() {
         let articleToUpdate = event.target.previousSibling.id
@@ -45,3 +45,4 @@ const articleEventHandlers = {
     }
 }
 
+export default articleEventHandlers

@@ -69,7 +69,7 @@ const articlesForms = {
         const saveArticleButton = functions.createEachElement("button", "Save", "saveArticleButton")
         saveArticleButton.textContent = "Save"
         saveArticleButton.addEventListener("click", () => {
-            articlesForms.buildNewArticle().then(() => {
+            this.buildNewArticle().then(() => {
                 fetchCalls.postArticles(inputValues)
             })
         })
@@ -78,33 +78,35 @@ const articlesForms = {
 
     },
 
-    buildNewArticle(eachNewArticle) {
+    buildNewArticle() {
 
         // Builds articles and appends to dom
 
         let buildFragment = document.createDocumentFragment()
-        
-        eachNewArticle.forEach(article => {
 
-            const eachNewArticleTitle = functions.createEachElement("p", `${article.title}`, "articleTitle")
-            const eachNewArticleSynopsis = functions.createEachElement("p", `${article.synopsis}`, "articleSynopsis")
-            const eachNewArticleURL = functions.createEachElement("p", `${article.url}`, "articleURL")
+            return fetchCalls.getAllArticles().then((response) => {
+            response.forEach(article => {
 
+                const eachNewArticleTitle = functions.createEachElement("p", `${article.title}`, "articleTitle")
+                const eachNewArticleSynopsis = functions.createEachElement("p", `${article.synopsis}`, "articleSynopsis")
+                const eachNewArticleURL = functions.createEachElement("p", `${article.url}`, "articleURL")
 
-            const editButton = functions.createEachElement("button", "Edit", `edit-button--${article.id}`)
-            editButton.addEventListener("click", articleEventHandlers.editHandler)
+                const editButton = functions.createEachElement("button", "Edit", `edit-button--${article.id}`)
+                editButton.addEventListener("click", articleEventHandlers.editHandler)
 
-            const deleteButton = functions.createEachElement("button", "Delete", `delete-button--${article.id}`)
-            deleteButton.addEventListener("click", articlesCalls.deleteArticles)
+                const deleteButton = functions.createEachElement("button", "Delete", `delete-button--${article.id}`)
+                deleteButton.addEventListener("click", articlesCalls.deleteArticles)
 
-            buildFragment.appendChild(eachNewArticleTitle)
-            buildFragment.appendChild(eachNewArticleSynopsis)
-            buildFragment.appendChild(eachNewArticleURL)
-            buildFragment.appendChild(editButton)
-            buildFragment.appendChild(deleteButton)
-        })
-            articlesContainer.appendChild(buildFragment)
-    },
+                buildFragment.appendChild(eachNewArticleTitle)
+                buildFragment.appendChild(eachNewArticleSynopsis)
+                buildFragment.appendChild(eachNewArticleURL)
+                buildFragment.appendChild(editButton)
+                buildFragment.appendChild(deleteButton)
+            })
+            
+        articlesContainer.appendChild(buildFragment)
+        }
+    )},
 
 
     editArticleForm(eachArticle) {
