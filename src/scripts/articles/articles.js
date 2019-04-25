@@ -72,7 +72,7 @@ const articlesForms = {
 
             const eachNewArticleTitle = functions.createEachElement("p", `${article.title}`, "articleTitle")
             const eachNewArticleSynopsis = functions.createEachElement("p", `${article.synopsis}`, "articleSynopsis")
-            const eachNewArticleURL = ("p", `${article.url}`, "articleURL")
+            const eachNewArticleURL = functions.createEachElement("p", `${article.url}`, "articleURL")
 
 
             const editButton = functions.createEachElement("button", "Edit", `edit-button--${article.id}`)
@@ -90,16 +90,6 @@ const articlesForms = {
             articlesContainer.appendChild(buildFragment)
     },
 
-    articlesList() {
-
-        // supposedly will list articles out
-        
-        if (articlesContainer.firstChild) {
-            articlesContainer.appendChild(articlesForms.newArticle())
-        } else {
-
-        }
-    },
 
     editArticleForm(eachArticle) {
 
@@ -133,4 +123,4 @@ const articlesForms = {
     }
 }
 
-
+export default articlesForms
