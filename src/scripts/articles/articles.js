@@ -15,19 +15,23 @@
 import articlesCalls from "../callsManager"
 import functions from "../functions"
 import articleEventHandlers from "../articles/articleEventHandlers"
+import fetchCalls from "../callsManager";
 
 const articlesContainer = document.querySelector("#articles-container")
 
 const articlesForms = {
 
-    addNewArticleButton() {
+    articleHeader() {
         const articleHeader = document.createElement("h2")
         articleHeader.textContent = "Articles"
         articlesContainer.appendChild(articleHeader)
+    },
 
+    addNewArticleButton() {
+        
         const newButton = document.createElement("button")
         newButton.textContent = "Add Article"
-        newButton.addEventListener("click", this.newArticle)
+        newButton.addEventListener("click", this.newArticleForm)
         articlesContainer.appendChild(newButton)
 
         const articlesFormSection = document.createElement("section")
@@ -35,30 +39,42 @@ const articlesForms = {
         articlesContainer.appendChild(articlesFormSection)
     },
 
-    newArticleForm(eachArticle) {
+    newArticleForm() {
 
         // builds fields for new article inputs and save button
 
         let newArticleFragment = document.createDocumentFragment()
         
-        titleLabel = functions.createEachElement("label", "Title: ", "titleLabel")
-        titleInput = functions.createEachElement("input", undefined, "titleInput")
+        const titleLabel = functions.createEachElement("label", "Title: ", "titleLabel")
+        const titleInput = functions.createEachElement("input", undefined, "titleInput")
         newArticleFragment.appendChild(titleLabel)
         newArticleFragment.appendChild(titleInput)
         
-        synopsisLabel = functions.createEachElement("label", "Synopsis: ", "synopsisLabel")
-        synopsisInput = functions.createEachElement("input", undefined, "synopsisInput")
+        const synopsisLabel = functions.createEachElement("label", "Synopsis: ", "synopsisLabel")
+        const synopsisInput = functions.createEachElement("input", undefined, "synopsisInput")
         newArticleFragment.appendChild(synopsisLabel)
         newArticleFragment.appendChild(synopsisInput)
 
-        urlLabel = functions.createEachElement("label", "Url: ", "urlLabel")
-        urlInput = functions.createEachElement("input", undefined, "urlInput")
+        const urlLabel = functions.createEachElement("label", "Url: ", "urlLabel")
+        const urlInput = functions.createEachElement("input", undefined, "urlInput")
         newArticleFragment.appendChild(urlLabel)
         newArticleFragment.appendChild(urlInput)
 
-        saveArticleButton = functions.createEachElement("button", "Save", "saveArticleButton")
-        saveArticleButton.addEventListener("click", )
+        const inputValues = {
+            title: titleInput.value,
+            synopsis: synopsisInput.value,
+            url: urlInput.value
+        }
+
+        const saveArticleButton = functions.createEachElement("button", "Save", "saveArticleButton")
+        saveArticleButton.textContent = "Save"
+        saveArticleButton.addEventListener("click", () => {
+            articlesForms.buildNewArticle().then(() => {
+                fetchCalls.postArticles(inputValues)
+            })
+        })
         newArticleFragment.appendChild(saveArticleButton)
+        articlesContainer.appendChild(newArticleFragment)
 
     },
 
