@@ -1,6 +1,6 @@
 const url = "http://localhost:8088"
 
-export default fetchCalls = {
+const fetchCalls = {
     getAllArticles() {
         return fetch(`${url}/articles`).then(response => response.json())
     }, 
@@ -14,4 +14,12 @@ export default fetchCalls = {
             body: JSON.stringify()
         }).then(response => response.json())
     },
+
+    deleteArticles(id) {
+        return fetch(`${url}/articles/${id}`, {
+            method: "DELETE"
+        }).then(response => response.json())
+    }
 }
+
+export default fetchCalls

@@ -38,6 +38,10 @@ const articleEventHandlers = {
         let articleToUpdate = event.target.previousSibling.id
         const articleUpdating = articleToUpdate.split("--")[1]
 
+    },
+
+    deleteHandler() {
+        console.log(event.target.id)
     }
 }
 

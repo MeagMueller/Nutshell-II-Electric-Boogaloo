@@ -2,7 +2,7 @@ const functions = {
     createEachElement(element, textInput, id) {
         const eachElement = document.createElement(element)
         if (textInput) {
-            eachElement.textContent = text
+            eachElement.textContent = textInput
         }
 
         if (id) {

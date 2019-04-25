@@ -12,14 +12,33 @@
 // user wants to change details, edit functionality 
 // prefilled form should populate
 // new save
-import articlesCalls from "./articlesCalls"
+import articlesCalls from "../callsManager"
 import functions from "../functions"
 import articleEventHandlers from "../articles/articleEventHandlers"
 
-const articlesContainer = document.querySelector("#articles-section")
+const articlesContainer = document.querySelector("#articles-container")
 
 const articlesForms = {
-    newArticle(eachArticle) {
+
+    addNewArticleButton() {
+        const articleHeader = document.createElement("h2")
+        articleHeader.textContent = "Articles"
+        articlesContainer.appendChild(articleHeader)
+
+        const newButton = document.createElement("button")
+        newButton.textContent = "Add Article"
+        newButton.addEventListener("click", this.newArticle)
+        articlesContainer.appendChild(newButton)
+
+        const articlesFormSection = document.createElement("section")
+        articlesFormSection.setAttribute("id", "articlesFormSection")
+        articlesContainer.appendChild(articlesFormSection)
+    },
+
+    newArticleForm(eachArticle) {
+
+        // builds fields for new article inputs and save button
+
         let newArticleFragment = document.createDocumentFragment()
         
         titleLabel = functions.createEachElement("label", "Title: ", "titleLabel")
@@ -44,23 +63,37 @@ const articlesForms = {
     },
 
     buildNewArticle(eachNewArticle) {
+
+        // Builds articles and appends to dom
+
         let buildFragment = document.createDocumentFragment()
         
         eachNewArticle.forEach(article => {
-            const eachNewArticleContainer = functions.createEachElement("section")
+
             const eachNewArticleTitle = functions.createEachElement("p", `${article.title}`, "articleTitle")
             const eachNewArticleSynopsis = functions.createEachElement("p", `${article.synopsis}`, "articleSynopsis")
             const eachNewArticleURL = ("p", `${article.url}`, "articleURL")
 
-            eachNewArticleContainer.appendChild(eachNewArticleTitle)
-            eachNewArticleContainer.appendChild(eachNewArticleSynopsis)
-            eachNewArticleContainer.appendChild(eachNewArticleURL)
 
-            articlesContainer.appendChild(eachNewArticleContainer)
+            const editButton = functions.createEachElement("button", "Edit", `edit-button--${article.id}`)
+            editButton.addEventListener("click", articleEventHandlers.editHandler)
+
+            const deleteButton = functions.createEachElement("button", "Delete", `delete-button--${article.id}`)
+            deleteButton.addEventListener("click", articlesCalls.deleteArticles)
+
+            buildFragment.appendChild(eachNewArticleTitle)
+            buildFragment.appendChild(eachNewArticleSynopsis)
+            buildFragment.appendChild(eachNewArticleURL)
+            buildFragment.appendChild(editButton)
+            buildFragment.appendChild(deleteButton)
         })
+            articlesContainer.appendChild(buildFragment)
     },
 
     articlesList() {
+
+        // supposedly will list articles out
+        
         if (articlesContainer.firstChild) {
             articlesContainer.appendChild(articlesForms.newArticle())
         } else {
@@ -69,6 +102,9 @@ const articlesForms = {
     },
 
     editArticleForm(eachArticle) {
+
+        // form for editing articles
+
         let editFragment = document.createDocumentFragment()
 
         editFragment.appendChild(functions.createEachElement("label", "Title: ", undefined))
